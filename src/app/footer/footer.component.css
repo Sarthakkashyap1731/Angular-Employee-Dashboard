@@ -1,0 +1,8 @@
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 55em;
+}
+.add-emp {
+  margin-top: 10px;
+}

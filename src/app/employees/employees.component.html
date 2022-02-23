@@ -1,0 +1,113 @@
+<div class="container-fluid">
+  <div class="search-bar">
+    <form class="d-flex">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        style="width: 30%; margin: 15px 0px"
+        (change)="searchByName($event)"
+      />
+    </form>
+  </div>
+</div>
+
+<table class="table" mat-table matSort class="mat-elevation-z8">
+  <thead>
+    <tr>
+      <th scope="col" style="width: 5%">id</th>
+      <th scope="col" style="width: 15%">
+        Name
+        <button (click)="sortingEmp('name', 'desc')">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <button (click)="sortingEmp('name', 'asc')">
+          <mat-icon>keyboard_arrow_up</mat-icon>
+        </button>
+      </th>
+      <!-- <ng-container matColumnDef="name">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by name"
+        >
+          Name
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container> -->
+      <th scope="col">Number</th>
+      <th scope="col">Department</th>
+      <th scope="col">Email</th>
+      <th scope="col">
+        Country<button (click)="sortingEmp('country', 'desc')">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <button (click)="sortingEmp('country', 'asc')">
+          <mat-icon>keyboard_arrow_up</mat-icon>
+        </button>
+      </th>
+      <th scope="col">Birthday</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let emp of Employees">
+      <td>{{ emp.id }}</td>
+      <td>
+        {{ emp.name }}
+      </td>
+      <td>{{ emp.phone }}</td>
+      <td>{{ emp.department }}</td>
+      <td>{{ emp.email }}</td>
+      <td>{{ emp.country }}</td>
+      <td>{{ emp.birthday }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-info btn-lg"
+          (click)="openModal()"
+          (click)="empById(emp.id)"
+        >
+          More Details
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-primary" (click)="paginationForEmp()">Load More</button>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: display }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Employee Details</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseHandled()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>ID : {{ selectedEmp?.id }}</p>
+        <p>Name : {{ selectedEmp?.name }}</p>
+        <p>Phone: {{ selectedEmp?.phone }}</p>
+        <p>Deplartment: {{ selectedEmp?.department }}</p>
+        <p>Emails: {{ selectedEmp?.email }}</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-default"
+          (click)="onCloseHandled()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
